@@ -1,0 +1,62 @@
+==============================================================================
+                 AUTOMATED OSCILLOSCOPE ENGINEERING TEST REPORT
+==============================================================================
+TEST SCOPE
+  Simulated time-domain capture and first-order low-pass frequency response.
+  Relative error (%) = 100 * (measured - nominal) / nominal.
+  Errors are signed. Gain percentage errors use linear V/V, not dB.
+
+1. NOMINAL REFERENCES
+------------------------------------------------------------------------------
+  Signal peak-to-peak voltage : 3.000000 V
+  Signal AC RMS voltage      : 1.060660 V
+  Low-pass cutoff frequency  : 10,000.00 Hz
+  Low-pass DC gain           : 20.000000 V/V (26.0206 dB)
+
+2. TIME-DOMAIN RESULTS
+------------------------------------------------------------------------------
+  Inferred sampling rate    : 500,000.00 Hz (500.000 kHz)
+  Processing                : 4th-order Butterworth design, 15 kHz cutoff
+                              Forward-backward, zero-phase filtering
+
+  Metric                         Raw Measured          Filtered
+  --------------------------------------------------------------------------
+  DC offset, V_dc (V)                 0.197689          0.198126
+  Peak-to-peak, V_pp (V)              3.369052          3.048334
+  AC RMS, V_rms_ac (V)                1.064758          1.061936
+  V_pp relative error (%)              +12.302            +1.611
+  AC RMS relative error (%)             +0.386            +0.120
+
+  Estimated SNR             : 22.887 dB
+  SNR definition            : 10*log10(filtered AC power / residual power)
+  Noise residual            : Raw measured voltage - filtered voltage
+
+3. FREQUENCY-RESPONSE RESULTS
+------------------------------------------------------------------------------
+  Measured passband gain    : 25.9997 dB
+                              19.951824 V/V
+  Passband gain error       : -0.241 %
+  Half-power threshold      : 22.9894 dB
+  Interpolated cutoff       : 10,488.007 Hz (10.488007 kHz)
+  Interpolated cutoff error : +4.880 %
+
+  Curve-fitted cutoff       : 10,064.761 Hz (10.064761 kHz)
+  Curve-fitted cutoff error : +0.648 %
+  Fitted passband gain      : 25.9932 dB
+                              19.937028 V/V
+  Fitted gain error         : -0.315 %
+
+4. ENGINEERING INTERPRETATION AND LIMITATIONS
+------------------------------------------------------------------------------
+  - Measured passband gain is the mean dB gain of the five lowest-frequency
+    points; its V/V equivalent is their geometric mean linear gain.
+  - The half-power level is exactly 20*log10(sqrt(2)) below the passband,
+    approximately 3.0103 dB, rather than exactly 3.0000 dB.
+  - Interpolated cutoff uses the measured passband and local log-frequency
+    interpolation. Fitted cutoff is relative to the fitted passband.
+  - Residual-based SNR excludes noise retained in the filter passband and
+    can include signal distortion and edge transients.
+  - Peak-to-peak metrics are sensitive to noise and extreme samples.
+  - Forward-backward filtering squares the designed magnitude response.
+  - No acceptance tolerances were specified; no PASS/FAIL judgment is made.
+==============================================================================
